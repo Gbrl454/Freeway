@@ -41,7 +41,6 @@ stream = ExtResource( 5 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 
-[connection signal="body_entered" from="Player" to="." method="_on_Player_body_entered"]
 [connection signal="pontua" from="Player" to="." method="_on_Player_pontua"]
 [connection signal="timeout" from="TimerCarrosRapido" to="." method="_on_TimerCarrosRapido_timeout"]
 [connection signal="timeout" from="TimerCarrosLento" to="." method="_on_TimerCarrosLento_timeout"]

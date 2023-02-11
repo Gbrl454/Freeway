@@ -1,0 +1,9 @@
+o jogo realmente para quando tem algum HUD, antes dava pra jogar com o hud aparecendo
+um sistema que contabiliza as mortes e as mostra no fim do jogo
+
+
+
+--- A fzr ---
+Hud tutorial
+variação de difilcuildade
+player setar quandos pontos vai querer alcançar

@@ -8,10 +8,10 @@ var score = 0
 
 func _ready():
 	$AudioTema.play()
-	$HUD/Mensagem.text = ""
-	$HUD/Button.hide()
+	$HUD._Reset()
+	$Player._Reset()
 	randomize()
-	
+
 func _on_TimerCarrosRapido_timeout():
 	var novo_carro = CENA_CARROS.instance()
 	add_child(novo_carro)
@@ -30,25 +30,20 @@ func _on_TimerCarrosLento_timeout():
 
 func _on_Player_pontua():
 	score += 1
-	if score >= 1:
+	$HUD/Placar.text = str(score)
+	$AudioPonto.play()
+	if score >= 5:
 		$AudioTema.stop()
-		$AudioVitoria.play()
 		$TimerCarrosRapido.stop()
 		$TimerCarrosLento.stop()
-		$HUD/Mensagem.text = "Player Ganhou!"
-		$HUD/Button.show()
-	else:
-		$HUD/Placar.text = str(score)
-		$AudioPonto.play()
-
+		$HUD._Stats($Player.mortes)
+		$Player._Play(false)
+		$AudioVitoria.play()
 
 func _on_HUD_reinicia():
 	score = 0
-	$Player.position = $Player.posicao_inicial
 	$AudioTema.play()
 	$TimerCarrosRapido.start()
 	$TimerCarrosLento.start()
-	$HUD/Mensagem.text = ""
-	$HUD/Placar.text = "0"
-	$HUD/Button.hide()
-	print_debug('reiniciou')
+	$HUD._Reset()
+	$Player._Reset()
