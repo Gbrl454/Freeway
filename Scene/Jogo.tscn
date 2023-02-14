@@ -45,3 +45,4 @@ stream = ExtResource( 5 )
 [connection signal="timeout" from="TimerCarrosRapido" to="." method="_on_TimerCarrosRapido_timeout"]
 [connection signal="timeout" from="TimerCarrosLento" to="." method="_on_TimerCarrosLento_timeout"]
 [connection signal="reinicia" from="HUD" to="." method="_on_HUD_reinicia"]
+[connection signal="tempoAcabou" from="HUD" to="." method="_on_HUD_tempoAcabou"]

@@ -1,6 +1,7 @@
 extends Node2D
 
 export var speed = 100
+var speedR = speed
 
 var screen_size
 var posicao_inicial = Vector2(640, 690)
@@ -15,11 +16,19 @@ func _ready():
 func _process(delta):
 	if playing == true:
 		var velocity = Vector2()
+		if Input.is_key_pressed(KEY_SHIFT):
+			speedR = speed*2
+		else:
+			speedR = speed
 		if Input.is_action_pressed("ui_up"):
 			velocity.y -= 1
 		if Input.is_action_pressed("ui_down"):
 			velocity.y += 1
-		velocity = velocity.normalized() * speed
+		if Input.is_action_pressed("ui_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("ui_right"):
+			velocity.x += 1
+		velocity = velocity.normalized() * speedR
 		if velocity.length() > 0:
 			$Anim.play()
 		else:
