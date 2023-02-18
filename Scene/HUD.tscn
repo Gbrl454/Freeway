@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Material freeway/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Material freeway/coin/coin_0000_0.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
@@ -16,6 +17,10 @@ size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 1 )
 
@@ -39,9 +44,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -640.0
-margin_top = -180.0
+margin_top = -238.0
 margin_right = 640.0
-margin_bottom = -60.0
+margin_bottom = -118.0
 custom_fonts/font = SubResource( 2 )
 text = "Mensagem"
 align = 1
@@ -53,9 +58,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -246.0
-margin_top = -60.0
+margin_top = -118.0
 margin_right = 246.0
-margin_bottom = 60.0
+margin_bottom = 2.0
 custom_fonts/font = SubResource( 3 )
 text = "Jogar Novamente"
 
@@ -65,9 +70,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -640.0
-margin_top = 64.0
+margin_top = 6.0
 margin_right = 640.0
-margin_bottom = 164.0
+margin_bottom = 106.0
 custom_fonts/font = SubResource( 2 )
 text = "Mortes"
 align = 1
@@ -81,6 +86,35 @@ align = 1
 valign = 1
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Coins" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -590.0
+margin_right = -40.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 5 )
+align = 2
+valign = 1
+
+[node name="Sprite" type="Sprite" parent="Coins"]
+position = Vector2( 570, 27 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="EndCoins" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = 106.0
+margin_right = 640.0
+margin_bottom = 206.0
+custom_fonts/font = SubResource( 2 )
+text = "Mortes"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

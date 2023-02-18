@@ -1,26 +1,44 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Material freeway/galinha/cima/sprite_1.png" type="Texture" id=1]
+[ext_resource path="res://Material freeway/galinha/0/right/1.png" type="Texture" id=1]
 [ext_resource path="res://Material freeway/sons/colide.wav" type="AudioStream" id=2]
-[ext_resource path="res://Material freeway/galinha/cima/sprite_2.png" type="Texture" id=3]
+[ext_resource path="res://Material freeway/galinha/0/left/2.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=4]
-[ext_resource path="res://Material freeway/galinha/cima/sprite_0.png" type="Texture" id=5]
-[ext_resource path="res://Material freeway/galinha/baixo/sprite_1.png" type="Texture" id=6]
-[ext_resource path="res://Material freeway/galinha/baixo/sprite_2.png" type="Texture" id=7]
-[ext_resource path="res://Material freeway/galinha/baixo/sprite_0.png" type="Texture" id=8]
+[ext_resource path="res://Material freeway/galinha/0/left/3.png" type="Texture" id=5]
+[ext_resource path="res://Material freeway/galinha/0/right/2.png" type="Texture" id=6]
+[ext_resource path="res://Material freeway/galinha/0/down/3.png" type="Texture" id=7]
+[ext_resource path="res://Material freeway/galinha/0/left/1.png" type="Texture" id=8]
+[ext_resource path="res://Material freeway/galinha/0/down/1.png" type="Texture" id=9]
+[ext_resource path="res://Material freeway/galinha/0/down/2.png" type="Texture" id=10]
+[ext_resource path="res://Material freeway/galinha/0/right/3.png" type="Texture" id=11]
+[ext_resource path="res://Material freeway/galinha/0/up/2.png" type="Texture" id=12]
+[ext_resource path="res://Material freeway/galinha/0/up/3.png" type="Texture" id=13]
+[ext_resource path="res://Material freeway/galinha/0/up/1.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "baixo",
+"name": "down0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "cima",
-"speed": 8.0
+"name": "left0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "right0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "up0",
+"speed": 5.0
 } ]
+
+[sub_resource type="GDScript" id=3]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 15.0
@@ -29,14 +47,16 @@ radius = 15.0
 script = ExtResource( 4 )
 
 [node name="Anim" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
-animation = "baixo"
+animation = "up0"
+script = SubResource( 3 )
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+scale = Vector2( -1.16265, 1.2 )
 shape = SubResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

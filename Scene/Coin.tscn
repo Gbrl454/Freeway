@@ -1,0 +1,33 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Material freeway/coin/coin_0005_1.png" type="Texture" id=1]
+[ext_resource path="res://Material freeway/coin/coin_0001_5.png" type="Texture" id=2]
+[ext_resource path="res://Material freeway/coin/coin_0002_4.png" type="Texture" id=3]
+[ext_resource path="res://Material freeway/coin/coin_0000_0.png" type="Texture" id=4]
+[ext_resource path="res://Material freeway/coin/coin_0003_3.png" type="Texture" id=5]
+[ext_resource path="res://Material freeway/coin/coin_0004_2.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Coin.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "coin",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Coin" type="Area2D"]
+script = ExtResource( 7 )
+
+[node name="Anim" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 1 )
+animation = "coin"
+
+[node name="Colisor" type="CollisionShape2D" parent="."]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="." to="." method="_on_Coin_area_entered"]

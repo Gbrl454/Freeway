@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 export var speed = 100
 var speedR = speed
@@ -6,8 +6,10 @@ var speedR = speed
 var screen_size
 var posicao_inicial = Vector2(640, 690)
 var mortes = 0
+var idPlayer = 0
 
 signal pontua
+signal plusCoin
 var playing = true
 
 func _ready():
@@ -34,19 +36,30 @@ func _process(delta):
 		else:
 			$Anim.stop()
 		if velocity.y > 0:
-			$Anim.animation = "baixo"
-		else:
-			$Anim.animation = "cima"
+			$Anim.animation = "down%s"%[idPlayer]
+		if velocity.y < 0:
+			$Anim.animation = "up%s"%[idPlayer]
+			
+		if velocity.x < 0 && velocity.y == 0:
+			$Anim.animation = "left%s"%[idPlayer]
+		if velocity.x > 0 && velocity.y == 0:
+			$Anim.animation = "right%s"%[idPlayer]
+		
 		position += velocity * delta
 		position.y = clamp(position.y, 0, screen_size.y)
 
 func _on_Player_body_entered(body):
-	if body.name == "LinhaChegada":
-		emit_signal("pontua")
-	else:
-		$Audio.play()
-		mortes += 1
-	position = posicao_inicial
+	match body.name:
+		"LinhaChegada":
+			emit_signal("pontua")
+			position = posicao_inicial
+	if "Carros" in body.name:
+			$Audio.play()
+			mortes += 1
+			position = posicao_inicial
+
+func _getCoin():
+	emit_signal("plusCoin")
 
 func _Reset():
 	mortes = 0
