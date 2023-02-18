@@ -5,7 +5,6 @@ const CENA_COINS = preload("res://Scene/Coin.tscn")
 
 var pistas_rapidas = [104, 272, 488]
 var pistas_lentas = [160, 216, 324, 384, 438, 544, 600]
-var score = 0
 var coinsScreen = 0
 
 func _ready():
@@ -31,14 +30,13 @@ func _on_TimerCarrosLento_timeout():
 	novo_carro.linear_damp = -1
 
 func _on_Player_pontua():
-	score += 1
-	$HUD/Placar.text = str(score)
+	Global.score += 1
+	$HUD/Placar.text = str(Global.score)
 	$AudioPonto.play()
 	if $TimerCoins.wait_time <= 0.75:
 		$TimerCoins.wait_time -= 0.25
 
 func _on_HUD_reinicia():
-	score = 0
 	$TimerCoins.wait_time = 5
 	$AudioTema.play()
 	$TimerCarrosRapido.start()
@@ -52,7 +50,7 @@ func _on_HUD_tempoAcabou():
 	$TimerCarrosRapido.stop()
 	$TimerCarrosLento.stop()
 	$TimerCoins.stop()
-	$HUD._endGame($Player.mortes)
+	$HUD._endGame()
 	$Player._Play(false)
 	$AudioVitoria.play()
 

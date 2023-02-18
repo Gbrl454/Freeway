@@ -1,5 +1,10 @@
 extends Area2D
 
+func _process(delta):
+	if Global.playing == false:
+		var _i = delta
+		queue_free()
+
 func _ready():
 	$Anim.play("coin")
 

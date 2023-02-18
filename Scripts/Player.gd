@@ -5,18 +5,18 @@ var speedR = speed
 
 var screen_size
 var posicao_inicial = Vector2(640, 690)
-var mortes = 0
-var idPlayer = 0
 
 signal pontua
 signal plusCoin
-var playing = true
 
 func _ready():
-	screen_size = get_viewport_rect().size
+	_Reset()
 	
 func _process(delta):
-	if playing == true:
+	if Input.is_key_pressed(KEY_ESCAPE):
+		Global.scene = get_tree().change_scene("res://Scene/Main.tscn")
+
+	if Global.playing == true:
 		var velocity = Vector2()
 		if Input.is_key_pressed(KEY_SHIFT):
 			speedR = speed*2
@@ -36,38 +36,40 @@ func _process(delta):
 		else:
 			$Anim.stop()
 		if velocity.y > 0:
-			$Anim.animation = "down%s"%[idPlayer]
+			$Anim.animation = "down%s"%[Global.idPlayer]
 		if velocity.y < 0:
-			$Anim.animation = "up%s"%[idPlayer]
+			$Anim.animation = "up%s"%[Global.idPlayer]
 			
 		if velocity.x < 0 && velocity.y == 0:
-			$Anim.animation = "left%s"%[idPlayer]
+			$Anim.animation = "left%s"%[Global.idPlayer]
 		if velocity.x > 0 && velocity.y == 0:
-			$Anim.animation = "right%s"%[idPlayer]
+			$Anim.animation = "right%s"%[Global.idPlayer]
 		
 		position += velocity * delta
 		position.y = clamp(position.y, 0, screen_size.y)
 
 func _on_Player_body_entered(body):
-	match body.name:
-		"LinhaChegada":
-			emit_signal("pontua")
-			position = posicao_inicial
-	if "Carros" in body.name:
-			$Audio.play()
-			mortes += 1
-			position = posicao_inicial
+	if Global.playing == true:
+		match body.name:
+			"LinhaChegada":
+				emit_signal("pontua")
+				position = posicao_inicial
+		if "Carros" in body.name:
+				$Audio.play()
+				Global.mortes += 1
+				position = posicao_inicial
 
 func _getCoin():
 	emit_signal("plusCoin")
 
 func _Reset():
-	mortes = 0
+	$Anim.animation = "up%s"%[Global.idPlayer]
+	screen_size = get_viewport_rect().size
 	_Play(true)
 	position = posicao_inicial
 
 func _Play(p):
-	playing = p
+	Global.playing = p
 	if p == false:
 		$Anim.stop()
 		hide()

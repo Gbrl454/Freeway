@@ -1,8 +1,5 @@
 extends Control
 
-var idPlayer = 0
-var idPlayerMax = 7
-
 func _ready():
 	_changePlayer()
 
@@ -15,7 +12,10 @@ func _on_Play_pressed():
 	$LabelProx.hide()
 
 func _on_AudioPlay_finished():
-	get_tree().change_scene("res://Scene/Jogo.tscn")
+	Global.coins = 0
+	Global.mortes = 0
+	Global.score = 0
+	Global.scene = get_tree().change_scene("res://Scene/Jogo.tscn")
 	$Play.show()
 	$Ante.show()
 	$Prox.show()
@@ -23,15 +23,15 @@ func _on_AudioPlay_finished():
 	$LabelProx.show()
 
 func _changePlayer():
-	if idPlayer == idPlayerMax:
-		idPlayer = 0
-	$Player.animation = "%s" % idPlayer
+	if Global.idPlayer == Global.idPlayerMax:
+		Global.idPlayer = 0
+	$Player.animation = "%s" % Global.idPlayer
 	$Player.play()
 
 func _on_Prox_pressed():
-	idPlayer += 1
+	Global.idPlayer += 1
 	_changePlayer()
 
 func _on_Ante_pressed():
-	idPlayer -= 1
+	Global.idPlayer -= 1
 	_changePlayer()

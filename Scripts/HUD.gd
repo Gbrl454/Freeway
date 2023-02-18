@@ -4,7 +4,6 @@ onready var timer := $Timer as Timer
 var tempoMin
 var tempoSec
 var tempo
-var coins = 0
 
 signal reinicia
 signal tempoAcabou
@@ -20,18 +19,17 @@ func _runTimer(on):
 		timer.stop()
 		$Tempo.hide()
 
-func _endGame(mortes_player):
+func _endGame():
 	_runTimer(false)
 	$Mensagem.text = "Você marcou %s ponto(s)!" % [$Placar.text]
-	$Mortes.text = "Morreu %s vezes" % [mortes_player]
-	if coins > 0:
+	$Mortes.text = "Morreu %s vezes" % [Global.mortes]
+	if Global.coins > 0:
 		$EndCoins.text = "Você pegou %s moeda(s)!" % [$Coins.text]
 	$Button.show()
 	$Coins.hide()
 
 func _startGame():
-	tempo = 180
-	coins = 0
+	tempo = Global.tempoInit
 	_setLabelTempo()
 	_runTimer(true)
 	$Button.hide()
@@ -39,7 +37,6 @@ func _startGame():
 	$Mortes.text = ""
 	$Mensagem.text = ""
 	$EndCoins.text = ""
-	$Placar.text = "0"
 	_setCoins()
 
 func _on_Timer_timeout():
@@ -59,9 +56,8 @@ func _setLabelTempo():
 	$Tempo.text = " %s:%s" % [tempoMin,tempoSec]
 
 func _on_Player_plusCoin():
-	print("Coins")
-	coins += 1
+	Global.coins += 1
 	_setCoins()
 
 func _setCoins():
-	$Coins.text = "%s" % [coins]
+	$Coins.text = "%s" % [Global.coins]
