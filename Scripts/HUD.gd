@@ -8,6 +8,10 @@ var tempo
 signal reinicia
 signal tempoAcabou
 
+func _process(delta):
+	$Coins.text = "%s" % [Global.coins]
+	var _i = delta
+
 func _on_Button_pressed():
 	emit_signal("reinicia")
 
@@ -20,6 +24,7 @@ func _runTimer(on):
 		$Tempo.hide()
 
 func _endGame():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_runTimer(false)
 	$Mensagem.text = "Você marcou %s ponto(s)!" % [$Placar.text]
 	$Mortes.text = "Morreu %s vezes" % [Global.mortes]
@@ -29,6 +34,7 @@ func _endGame():
 	$Coins.hide()
 
 func _startGame():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	tempo = Global.tempoInit
 	_setLabelTempo()
 	_runTimer(true)
@@ -37,7 +43,6 @@ func _startGame():
 	$Mortes.text = ""
 	$Mensagem.text = ""
 	$EndCoins.text = ""
-	_setCoins()
 
 func _on_Timer_timeout():
 	_setLabelTempo()
@@ -57,7 +62,3 @@ func _setLabelTempo():
 
 func _on_Player_plusCoin():
 	Global.coins += 1
-	_setCoins()
-
-func _setCoins():
-	$Coins.text = "%s" % [Global.coins]

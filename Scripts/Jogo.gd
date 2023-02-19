@@ -31,6 +31,7 @@ func _on_TimerCarrosLento_timeout():
 
 func _on_Player_pontua():
 	Global.score += 1
+	Global.coins += (Global.score+1) * Global.C_CHEGADA
 	$HUD/Placar.text = str(Global.score)
 	$AudioPonto.play()
 	if $TimerCoins.wait_time <= 0.75:

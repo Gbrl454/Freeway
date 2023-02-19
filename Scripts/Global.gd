@@ -8,5 +8,8 @@ var playing = true
 var score
 var coins
 var mortes
-var tempoInit = 10
+var tempoInit = 180
 var scene
+
+var C_CHEGADA = 15
+var C_MORTE = 5

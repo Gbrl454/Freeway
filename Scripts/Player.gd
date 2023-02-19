@@ -13,9 +13,9 @@ func _ready():
 	_Reset()
 	
 func _process(delta):
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if Input.is_key_pressed(KEY_ESCAPE) || Global.coins == -999999999:
 		Global.scene = get_tree().change_scene("res://Scene/Main.tscn")
-
+	
 	if Global.playing == true:
 		var velocity = Vector2()
 		if Input.is_key_pressed(KEY_SHIFT):
@@ -57,6 +57,7 @@ func _on_Player_body_entered(body):
 		if "Carros" in body.name:
 				$Audio.play()
 				Global.mortes += 1
+				Global.coins -= Global.C_MORTE
 				position = posicao_inicial
 
 func _getCoin():
