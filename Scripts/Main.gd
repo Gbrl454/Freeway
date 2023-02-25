@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	$Versao.text = "Gbrl454 - %s" % Global.VERSION
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_changePlayer()
 
@@ -24,8 +25,10 @@ func _on_AudioPlay_finished():
 	$LabelProx.show()
 
 func _changePlayer():
-	if Global.idPlayer == Global.idPlayerMax:
+	if Global.idPlayer >= Global.idPlayerMax:
 		Global.idPlayer = 0
+	if Global.idPlayer < 0:
+		Global.idPlayer = Global.idPlayerMax
 	$Player.animation = "%s" % Global.idPlayer
 	$Player.play()
 

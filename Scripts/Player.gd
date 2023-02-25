@@ -1,7 +1,6 @@
 extends Area2D
 
-export var speed = 100
-var speedR = speed
+var speedR = Global.speed
 
 var screen_size
 var posicao_inicial = Vector2(640, 690)
@@ -13,15 +12,15 @@ func _ready():
 	_Reset()
 	
 func _process(delta):
-	if Input.is_key_pressed(KEY_ESCAPE) || Global.coins == -999999999:
+	if Input.is_key_pressed(KEY_ESCAPE) || Global.coins == -Global.C_MAX_BIN || Global.coins == Global.C_MAX_BIN:
 		Global.scene = get_tree().change_scene("res://Scene/Main.tscn")
 	
 	if Global.playing == true:
 		var velocity = Vector2()
 		if Input.is_key_pressed(KEY_SHIFT):
-			speedR = speed*2
+			speedR = Global.speed*2
 		else:
-			speedR = speed
+			speedR = Global.speed
 		if Input.is_action_pressed("ui_up"):
 			velocity.y -= 1
 		if Input.is_action_pressed("ui_down"):

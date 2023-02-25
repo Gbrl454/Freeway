@@ -135,6 +135,7 @@ margin_left = -640.0
 margin_top = 102.0
 margin_right = 640.0
 margin_bottom = 118.0
+rect_pivot_offset = Vector2( -110, 34 )
 custom_colors/font_color = Color( 0.396078, 0.0509804, 0.0509804, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "Gabriel Matos"
@@ -206,6 +207,20 @@ custom_fonts/font = SubResource( 6 )
 text = "<"
 flat = true
 icon_align = 1
+
+[node name="Versao" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_top = 688.0
+margin_right = 640.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( -110, 34 )
+custom_colors/font_color = Color( 0.396078, 0.0509804, 0.0509804, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Gbrl454 - v0.0.0"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="finished" from="AudioPlay" to="." method="_on_AudioPlay_finished"]

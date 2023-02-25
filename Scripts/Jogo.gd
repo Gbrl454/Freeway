@@ -38,6 +38,7 @@ func _on_Player_pontua():
 		$TimerCoins.wait_time -= 0.25
 
 func _on_HUD_reinicia():
+	coinsScreen = 0
 	$TimerCoins.wait_time = 5
 	$AudioTema.play()
 	$TimerCarrosRapido.start()
@@ -56,7 +57,7 @@ func _on_HUD_tempoAcabou():
 	$AudioVitoria.play()
 
 func _on_TimerCoins_timeout():
-	if coinsScreen <= 50:
+	if coinsScreen <= Global.C_MAX:
 		var novo_coin = CENA_COINS.instance()
 		add_child(novo_coin)
 		novo_coin.position = Vector2((randi() % 1080)+100, (randi() % 500)+110)

@@ -28,8 +28,7 @@ func _endGame():
 	_runTimer(false)
 	$Mensagem.text = "Você marcou %s ponto(s)!" % [$Placar.text]
 	$Mortes.text = "Morreu %s vezes" % [Global.mortes]
-	if Global.coins > 0:
-		$EndCoins.text = "Você pegou %s moeda(s)!" % [$Coins.text]
+	$EndCoins.text = "Seu saldo é de %s moeda(s)!" % [$Coins.text]
 	$Button.show()
 	$Coins.hide()
 
@@ -61,4 +60,4 @@ func _setLabelTempo():
 	$Tempo.text = " %s:%s" % [tempoMin,tempoSec]
 
 func _on_Player_plusCoin():
-	Global.coins += 1
+	Global.coins += int(Global.C_VAL * Global.score) +1
